@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../Shared/Navber/Navber";
-import { io } from "socket.io-client";
+
+
 import Chat from "./Chat/Chat";
 import "./Chat/Chat.css";
 import Users from "./Users/Users.js";
@@ -8,13 +8,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+
 import { useEffect } from "react";
 import moment from "moment";
 import Emoji from "./Emoji/Emoji";
 import { AiOutlineLink, AiOutlineSend } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useRef } from "react";
+import Navbar from "../../Shared/Navber/Navber";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const Massenger = () => {
   const { user } = useContext(AuthContext);
