@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../../src/assets/images/loginImage5.jpg';
 import img2 from '../../../src/assets/images/loginImage3.jpg';
 import img3 from '../../../src/assets/images/banner6.webp';
@@ -11,8 +11,12 @@ import { toast } from 'react-hot-toast';
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
-  const navigate = useNavigate();    
-  const imageHostKey = process.env.REACT_APP_imgbb_key;    
+let navigate = useNavigate();
+let location = useLocation();
+ 
+
+let from = location.state?.from?.pathname || "/";
+   
 
 
   const handleSignUp = (data) => {
@@ -28,7 +32,7 @@ const SignUp = () => {
       updateUser(userInfo)
                     .then(() => {
                         saveUsers(data, userInfo?.displayName, data?.email);
-                        navigate('/login');
+                       
                     })
                     .catch(error => {
                         console.log(error);
@@ -42,7 +46,8 @@ const SignUp = () => {
     const image = data.image[0];
 const formData = new FormData();
 formData.append('image', image);
-const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+const url =
+  "https://api.imgbb.com/1/upload?key=361db61aaf2e5a08fc416c3257898005";
 
 fetch(url, {
   method: 'POST',
@@ -70,8 +75,11 @@ fetch(url, {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
-            toast.success('User Data Save Successfully');
+            console.log(data)  
+             navigate(from, { replace: true });
+
+            toast.success("user registered successfully");
+
         })
     }
 })

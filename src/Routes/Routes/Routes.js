@@ -20,90 +20,98 @@ import Contact from "../../Pages/Contact/Contact";
 
 
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Main></Main>,
-		children: [
-			{
-				path: "/",
-				element: (
-					<>
-						<Home></Home>
-					</>
-				),
-			},
-			{
-				path: "/home",
-				element: <Home></Home>,
-			},
-			{
-				path: "/participants",
-				loader: async () => {
-					return fetch("https://remote-talks-server.vercel.app/users");
-				},
-				element: <Participants></Participants>,
-			},
-			{
-				path: "/about",
-				element: <NewAboutSection></NewAboutSection>,
-			},
-			{
-				path: "/teams",
-				element: <About></About>,
-			},
-			{
-				path: "/sharminDetails",
-				element: <SharminDetails></SharminDetails>,
-			},
-			{
-				path: "/login",
-				element: <Login></Login>,
-			},
-			{
-				path: "/signup",
-				element: <SignUp></SignUp>,
-			},
-			{
-				path: "/review",
-				element: <FeedBack></FeedBack>,
-			},
-			{
-				path: "/profile",
-				element: (
-					<PrivateRoute>
-						<MyProfile></MyProfile>
-					</PrivateRoute>
-				),
-			},
-			{
-				path: "/contact",
-				element: <Contact></Contact>
-			}
-		],
-	},
-	{
-		path: "/meeting",
-		element: (
-			<ThemeProvider theme={generateMuiTheme()}>
-				<Meeting></Meeting>
-			</ThemeProvider>
-		),
-	},
-	{
-		path: "/whiteboard",
-		element: (
-			<div className="bg-white">
-				<WhiteBoard />
-			</div>
-		),
-	},
-	{
-		path: "/message",
-		element: <Massenger></Massenger>,
-	},
-	{
-		path: "/*",
-		element: <ErrorPage></ErrorPage>
-	}
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: (
+          <>
+            <Home></Home>
+          </>
+        )
+      },
+      {
+        path: "/home",
+        element: <Home></Home>
+      },
+      {
+        path: "/participants",
+        loader: async () => {
+          return fetch("https://remote-talks-server.vercel.app/users");
+        },
+        element: (
+          <PrivateRoute>
+            <Participants></Participants>
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/about",
+        element: <NewAboutSection></NewAboutSection>
+      },
+      {
+        path: "/teams",
+        element: <About></About>
+      },
+      {
+        path: "/sharminDetails",
+        element: <SharminDetails></SharminDetails>
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>
+      },
+      {
+        path: "/review",
+        element: <FeedBack></FeedBack>
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>
+      }
+    ]
+  },
+  {
+    path: "/meeting",
+    element: (
+      <ThemeProvider theme={generateMuiTheme()}>
+        <Meeting></Meeting>
+      </ThemeProvider>
+    )
+  },
+  {
+    path: "/whiteboard",
+    element: (
+      <div className="bg-white">
+        <WhiteBoard />
+      </div>
+    )
+  },
+  {
+    path: "/message",
+    element: (
+      <PrivateRoute>
+        <Massenger></Massenger>
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "/*",
+    element: <ErrorPage></ErrorPage>
+  }
 ]);
 export default router;

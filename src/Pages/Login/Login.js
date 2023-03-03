@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../../src/assets/images/loginImage3.jpg';
 import img2 from '../../../src/assets/images/loginImage5.jpg';
 import img3 from '../../../src/assets/images/banner6.webp';
@@ -13,7 +13,11 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const {LogIn,googleLogIn} = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
-  const navigate = useNavigate();
+let navigate = useNavigate();
+let location = useLocation();
+
+
+let from = location.state?.from?.pathname || "/";
 
 
   const handleLogin = (data) => {
@@ -23,7 +27,7 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             toast.success('Login Successfully');
-            navigate('/');
+         navigate(from, { replace: true });
         })
         .catch(error =>{
             console.log(error)
