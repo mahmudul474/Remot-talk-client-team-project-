@@ -15,8 +15,13 @@ import Emoji from "./Emoji/Emoji";
 import { AiOutlineLink, AiOutlineSend } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useRef } from "react";
+<<<<<<< HEAD
 import { AuthContext } from "../../../context/AuthProvider";
 import Navbar from "../../Shared/Navber/Navber";
+=======
+import Navbar from "../../Shared/Navber/Navber";
+import { AuthContext } from "../../../context/AuthProvider";
+>>>>>>> d64632a7ef7b9fade357daa0a0fe21ef4310fb27
 
 const Massenger = () => {
   const { user } = useContext(AuthContext);
